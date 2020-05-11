@@ -11,12 +11,12 @@ namespace Employee_WebApp_Core.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiVersion("1.0")]
-    public class EmployeesController : ControllerBase
+    [ApiVersion("2.0")]
+    public class Employeesv2Controller : ControllerBase
     {
         private readonly IEmployeeRepository employeeRepository;
 
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        public Employeesv2Controller(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }
