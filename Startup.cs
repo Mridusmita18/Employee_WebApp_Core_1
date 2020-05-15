@@ -63,7 +63,7 @@ namespace Employee_WebApp_Core
                 //app.UseStatusCodePages();
                 app.UseStatusCodePagesWithRedirects("/Error/{0}");
             }
-
+            app.UseCustomMiddleware();
             app.UseHttpsRedirection();
 
             app.UseRouting();
