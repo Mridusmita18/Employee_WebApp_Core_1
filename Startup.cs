@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+//using Microsoft.VisualStudio.Web.CodeGeneration;
+
 
 namespace Employee_WebApp_Core
 {
@@ -31,6 +33,7 @@ namespace Employee_WebApp_Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             services.AddControllers();
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
@@ -52,8 +55,10 @@ namespace Employee_WebApp_Core
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory logger)
         {
+            logger.CreateLogger("LogFile");
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,6 +70,7 @@ namespace Employee_WebApp_Core
             }
             app.UseCustomMiddleware();
             app.UseHttpsRedirection();
+           
 
             app.UseRouting();
             app.UseAuthentication();
